@@ -1,60 +1,75 @@
-<script>
-	export let segment;
-</script>
+<div class="list-group-item active">
+    Data entry
+</div>
 
-<style>
-	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
-		font-weight: 300;
-		padding: 0 1em;
-	}
+<a href="/footprint" class="list-group-item list-group-item-action waves-effect">
+    <i class="far fa-list-alt mr-3"></i>
+    <strong>Footprint form</strong>
+</a>
+<a href="/energy-module" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-recycle mr-3"></i>
+    <strong>Energy module</strong>
+</a>
+<a href="/access-rights" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-walking mr-3"></i>Manage access rights
+</a>
+<a href="/data-collection-tools" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-tools mr-3"></i>Data collection tools
+</a>
+<a href="/demo-api" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-tools mr-3"></i>
+    <strong>API demo</strong>
+</a>
 
-	ul {
-		margin: 0;
-		padding: 0;
-	}
+<!-- Footprint Interpretation -->
+<div class="list-group-item active mt-4">
+    Footprint Interpretation
+</div>
 
-	/* clearfix */
-	ul::after {
-		content: '';
-		display: block;
-		clear: both;
-	}
+<a href="/graphs-and-tables" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-chart-bar mr-3"></i>Graphs and tables
+</a>
+<a href="/simulations" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-project-diagram mr-3"></i>Simulations
+</a>
 
-	li {
-		display: block;
-		float: left;
-	}
+<!-- Admin -->
+<div class="list-group-item active mt-4">
+    Admin
+</div>
 
-	.selected {
-		position: relative;
-		display: inline-block;
-	}
+<a href="/indicator" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3"></i>Indicator
+</a>
+<a href="/model" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3"></i>Model
+</a>
+<a href="/user-administration" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3"></i>User administration
+</a>
+<a href="/entreprises" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3"></i>Entreprises
+</a>
+<a href="/scope" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3"></i>Scope
+</a>
+<a href="/partners" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3"></i>Partners
+</a>
 
-	.selected::after {
-		position: absolute;
-		content: '';
-		width: calc(100% - 1em);
-		height: 2px;
-		background-color: rgb(255,62,0);
-		display: block;
-		bottom: -1px;
-	}
 
-	a {
-		text-decoration: none;
-		padding: 1em 0.5em;
-		display: block;
-	}
-</style>
+<!--<nav>-->
+<!--	<ul>-->
+<!--		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>home
+</a></li>-->
+<!--		<li><a class='{segment === "items" ? "selected" : ""}' href='items'>Items
+</a></li>-->
+<!--		<li><a class='{segment === "about" ? "selected" : ""}' href='about'>about
+</a></li>-->
 
-<nav>
-	<ul>
-		<li><a class='{segment === undefined ? "selected" : ""}' href='.'>home</a></li>
-		<li><a class='{segment === "about" ? "selected" : ""}' href='about'>about</a></li>
-
-		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
-		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch class='{segment === "blog" ? "selected" : ""}' href='blog'>blog</a></li>
-	</ul>
-</nav>
+<!--		&lt;!&ndash; for the blog link, we're using rel=prefetch so that Sapper prefetches-->
+<!--		     the blog data when we hover over the link or tap it on a touchscreen &ndash;&gt;-->
+<!--		<li><a rel=prefetch class='{segment === "blog" ? "selected" : ""}' href='blog'>blog
+</a></li>-->
+<!--	</ul>-->
+<!--</nav>-->

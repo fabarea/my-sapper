@@ -1,46 +1,108 @@
-<style>
-	h1, figure, p {
-		text-align: center;
-		margin: 0 auto;
-	}
+<script>
 
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
+	// Demo components
+	import ModalCard from '../components/demo/ModalCard.svelte';
+	import TableCard from '../components/demo/TableCard.svelte';
+	import GoogleMapsCard from '../components/demo/GoogleMapsCard.svelte';
+	import PieChartCard from '../components/demo/PieChartCard.svelte';
+	import LineChartCard from '../components/demo/LineChartCard.svelte';
+	import BadgeCard from '../components/demo/BadgeCard.svelte';
+	import RadarChartCard from '../components/demo/RadarChartCard.svelte';
+	import BarChartCard from '../components/demo/BarChartCard.svelte';
+	import HorizontalBarChartCard from '../components/demo/HorizontalBarChartCard.svelte';
+	import DoughnutChartCard from '../components/demo/DoughnutChartCard.svelte';
 
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
-	}
-</style>
+</script>
 
 <svelte:head>
-	<title>Sapper project template</title>
+	<title>Plateforme CO2</title>
 </svelte:head>
 
-<h1>Great success!</h1>
 
-<figure>
-	<img alt='Borat' src='great-success.png'>
-	<figcaption>HIGH FIVE!</figcaption>
-</figure>
+<!--Grid row-->
+<div class="row wow fadeIn">
 
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+	<!--Grid column-->
+	<div class="col-md-9 mb-4">
+		<BarChartCard/>
+	</div>
+	<!--Grid column-->
+
+	<!--Grid column-->
+	<div class="col-md-3 mb-4">
+
+		<PieChartCard/>
+		<BadgeCard/>
+
+	</div>
+	<!--Grid column-->
+
+</div>
+<!--Grid row-->
+
+<!--Grid row-->
+<div class="row wow fadeIn">
+
+	<!--Grid column-->
+	<div class="col-md-6 mb-4">
+		<TableCard color={'blue-grey'}/>
+	</div>
+	<!--Grid column-->
+
+	<!--Grid column-->
+	<div class="col-md-6 mb-4">
+		<TableCard color={'blue'}/>
+	</div>
+	<!--Grid column-->
+
+</div>
+<!--Grid row-->
+
+<!--Grid row-->
+<div class="row wow fadeIn">
+
+	<!--Grid column-->
+	<div class="col-lg-6 col-md-6 mb-4">
+		<LineChartCard/>
+	</div>
+	<!--Grid column-->
+
+	<!--Grid column-->
+	<div class="col-lg-6 col-md-6 mb-4">
+		<RadarChartCard/>
+	</div>
+	<!--Grid column-->
+
+	<!--Grid column-->
+	<div class="col-lg-6 col-md-6 mb-4">
+
+		<DoughnutChartCard/>
+
+	</div>
+	<!--Grid column-->
+
+	<!--Grid column-->
+	<div class="col-lg-6 col-md-6 mb-4">
+
+		<HorizontalBarChartCard/>
+	</div>
+	<!--Grid column-->
+</div>
+<!--Grid row-->
+
+<!--Grid row-->
+<div class="row wow fadeIn">
+
+	<!--Grid column-->
+	<div class="col-md-6 mb-4">
+		<GoogleMapsCard/>
+	</div>
+	<!--Grid column-->
+
+	<!--Grid column-->
+	<div class="col-md-6 mb-4">
+		<ModalCard/>
+	</div>
+	<!--Grid column-->
+</div>
+<!--Grid row-->
