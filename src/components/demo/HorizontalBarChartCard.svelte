@@ -3,7 +3,6 @@
 
     onMount(() => {
 
-        // new WOW().init();
         new Chart(document.getElementById("horizontalBar"), {
             "type": "horizontalBar",
             "data": {
