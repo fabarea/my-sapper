@@ -1,6 +1,6 @@
 <script>
     import {goto, stores} from '@sapper/app';
-    import ListErrors from '../components/ListErrors.svelte';
+    import ListErrors from '../../components/ListErrors.svelte';
     import {post} from 'utils.js';
 
     const {session} = stores();
@@ -23,23 +23,13 @@
 </script>
 
 <svelte:head>
-    <title>Energy Module</title>
+    <title>Identification</title>
 </svelte:head>
 
-<!--Grid row-->
-<div class="row wow fadeIn">
-
-    <!--Grid column-->
-    <div class="col-md-6 mb-4">
-
-        <!--Card-->
-        <div class="card">
-
-            <!-- Card header -->
-            <div class="card-header"></div>
-
-            <!--Card content-->
-            <div class="card-body">
+<div class="auth-page">
+    <div class="container page">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 col-xs-12">
                 <h1 class="text-xs-center">Identification</h1>
                 <p class="text-xs-center">
                     <a href="/register">Besoin d'un compte?</a>
@@ -51,31 +41,25 @@
                     <fieldset class="md-form">
                         <input class="form-control"
                                type="email"
-                               id="email"
+							   id="email"
                                bind:value={email}>
                         <label for="email">Email</label>
                     </fieldset>
 
                     <fieldset class="md-form">
                         <input type="password"
-                               id="password"
-                               class="form-control"
+							   id="password"
+							   class="form-control"
                                bind:value={password}>
                         <label for="password">Mot de passe</label>
                     </fieldset>
 
                     <button class="btn btn-lg btn-primary pull-xs-right"
-                            type="submit" disabled='{!email || !password}'>
+							type="submit" disabled='{!email || !password}'>
                         S'identifier
                     </button>
                 </form>
             </div>
-
         </div>
-        <!--/.Card-->
-
     </div>
-    <!--Grid column-->
-
 </div>
-<!--Grid row-->
