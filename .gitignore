@@ -5,6 +5,7 @@ yarn-error.log
 /cypress/screenshots/
 /__sapper__/
 .idea
+.sessions
 
 # Local Netlify folder
 .netlify
