@@ -1,12 +1,7 @@
-<script>
-    import LoginBox from '../components/LoginBox.svelte';
-
-    export let segment;
-</script>
-
 <svelte:head>
     <title>Footprint</title>
 </svelte:head>
+
 
 <!--Grid row-->
 <div class="row wow fadeIn">
@@ -23,8 +18,6 @@
             <!--Card content-->
             <div class="card-body">
                 Work in progress...
-
-                <LoginBox/>
             </div>
 
         </div>
