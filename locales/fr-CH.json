@@ -1,0 +1,18 @@
+{
+  "title": {
+    "index": " Plantilla de proyecto Sapper!"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca",
+    "blog": "Blog"
+  },
+  "messages": {
+    "success": "Grand succès"
+  },
+  "languages": {
+    "en": "English",
+    "fr": "Français",
+    "de": "Deutsch"
+  }
+}

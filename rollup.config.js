@@ -3,6 +3,7 @@ import replace from 'rollup-plugin-replace';
 import commonjs from 'rollup-plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
+import json from '@rollup/plugin-json'
 import postcss from 'rollup-plugin-postcss';
 import {terser} from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
@@ -12,7 +13,17 @@ const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
-const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
+// Old default config. Check with that.
+// const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
+const onwarn = warning => {
+    // Skip certain warnings
+
+    // should intercept ... but doesn't in some rollup versions
+    if ( warning.code === 'THIS_IS_UNDEFINED' ) { return; }
+
+    // console.warn everything else
+    console.warn( warning.message );
+}
 const dedupe = importee => importee === 'svelte' || importee.startsWith('svelte/');
 
 const postcssOptions = () => ({
@@ -52,6 +63,11 @@ export default {
                 dedupe
             }),
             commonjs(),
+
+            json({
+                namedExports: false,
+                compact: !dev,
+            }),
 
             postcss(postcssOptions()),
 
@@ -96,6 +112,11 @@ export default {
                 dedupe
             }),
             commonjs(),
+
+            json({
+                namedExports: false,
+                compact: !dev,
+            }),
 
             postcss(postcssOptions())
         ],

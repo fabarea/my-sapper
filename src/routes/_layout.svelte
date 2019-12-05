@@ -9,6 +9,7 @@
     export let segment;
 </script>
 
+
 <div class="container-for-admin">
     <!--Main Navigation-->
     <header>
@@ -32,9 +33,9 @@
                 <!-- Links -->
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                    <SubNavigation/>
+                    <SubNavigation {segment}/>
 
-                    <LanguageNavigation/>
+                    <LanguageNavigation {segment}/>
 
                 </div>
 
@@ -48,7 +49,7 @@
             <Logo/>
 
             <div class="list-group list-group-flush">
-                <Nav/>
+                <Nav {segment}/>
             </div>
 
         </div>
