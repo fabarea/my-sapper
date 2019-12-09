@@ -1,3 +1,11 @@
+<script>
+  import { userStore } from "../stores";
+
+  // Initialize the store variable
+  // $: ({user} = $userStore);
+  $: user = $userStore;
+</script>
+
 <div class="list-group-item active">Data entry</div>
 
 <a
@@ -45,39 +53,43 @@
   Simulations
 </a>
 
-<!-- Admin -->
-<div class="list-group-item active mt-4">Admin</div>
+{#if user && user.role.name === 'Admin'}
+  <!-- Admin -->
+  <div class="list-group-item active mt-4">Admin</div>
 
-<a
-  href="/indicator"
-  class="list-group-item list-group-item-action waves-effect">
-  <i class="fas fa-user-cog mr-3" />
-  Indicator
-</a>
-<a href="/model" class="list-group-item list-group-item-action waves-effect">
-  <i class="fas fa-user-cog mr-3" />
-  Model
-</a>
-<a
-  href="/user-administration"
-  class="list-group-item list-group-item-action waves-effect">
-  <i class="fas fa-user-cog mr-3" />
-  User administration
-</a>
-<a
-  href="/entreprises"
-  class="list-group-item list-group-item-action waves-effect">
-  <i class="fas fa-user-cog mr-3" />
-  Entreprises
-</a>
-<a href="/scope" class="list-group-item list-group-item-action waves-effect">
-  <i class="fas fa-user-cog mr-3" />
-  Scope
-</a>
-<a href="/partners" class="list-group-item list-group-item-action waves-effect">
-  <i class="fas fa-user-cog mr-3" />
-  Partners
-</a>
+  <a
+    href="/indicator"
+    class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3" />
+    Indicator
+  </a>
+  <a href="/model" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3" />
+    Model
+  </a>
+  <a
+    href="/user-administration"
+    class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3" />
+    <strong>User administration</strong>
+  </a>
+  <a
+    href="/entreprises"
+    class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3" />
+    Entreprises
+  </a>
+  <a href="/scope" class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3" />
+    Scope
+  </a>
+  <a
+    href="/partners"
+    class="list-group-item list-group-item-action waves-effect">
+    <i class="fas fa-user-cog mr-3" />
+    Partners
+  </a>
+{/if}
 
 <!--<nav>-->
 <!--	<ul>-->

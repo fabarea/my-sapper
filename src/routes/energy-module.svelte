@@ -4,75 +4,31 @@
   import { onMount } from "svelte";
   import ApolloClient from "apollo-boost";
   import gql from "graphql-tag";
-  import config from "../config";
   import { _ } from "svelte-i18n";
+  import { stores } from "@sapper/app";
+  import { getContext } from "svelte";
+  import { userStore } from "../stores";
+  import LoginForm from "../components/Login/LoginForm.svelte";
+  import RegisterForm from "../components/Login/RegisterForm.svelte";
+  import LogoutForm from "../components/Login/LogoutForm.svelte";
 
-  // Request API.
-  // Add your own code here to customize or restrict how the public can register new users.
-  // axios
-  //         .post('${config.apiUrl}/auth/local/register', {
-  //             username: 'Strapi user',
-  //             email: 'user@strapi.io',
-  //             password: 'strapiPassword',
-  //         })
-  //         .then(response => {
-  //             // Handle success.
-  //             console.log('Well done!');
-  //             console.log('User profile', response.data.user);
-  //             console.log('User token', response.data.jwt);
-  //         })
-  //         .catch(error => {
-  //             // Handle error.
-  //             console.log('An error occurred:', error);
-  //         });
-  // Request API.
+  // Get page from the store. It should be called with $page
+  const { page } = stores();
+  $: user = $userStore;
 
+  // Retrieve the context
+  const context = getContext("context");
+  let { jwtToken } = context;
+
+  // Local reactive props
   export let orders = [];
-  export let user = null;
-  export let jwtToken = "";
-  export let loginError = 0;
-  export let username = "";
-  export let password = "";
 
   /**
-   * Authenticate a user against Strapi API.
+   *
    */
-  function handleAuthenticate() {
-    console.log(username);
-    // temporary
-    const _username = username ? username : "user@strapi.io";
-
-    const _password = password ? password : "strapiPassword";
-
-    loginError = 0;
-    axios
-      .post(`${config.apiUrl}/auth/local`, {
-        identifier: _username,
-        password: _password
-      })
-      .then(response => {
-        if (response.data.user) {
-          user = response.data.user;
-          jwtToken = response.data.jwt;
-
-          Cookies.set("user", user);
-          Cookies.set("jwt", jwtToken);
-        }
-      })
-      .catch(error => {
-        // Handle error.
-        loginError = error.response.status;
-        if (loginError === 400) {
-          console.log("An error occurred: wrong credentials");
-        } else {
-          console.log("An error occurred:", error);
-        }
-      });
-  }
-
   function fetchOrders() {
     axios
-      .get(`${config.apiUrl}/orders`, {
+      .get(`${context.apiUrl}/orders`, {
         headers: {
           Authorization: "Bearer " + jwtToken
         }
@@ -86,11 +42,6 @@
       });
   }
 
-  if (Cookies.get("user") && Cookies.get("jwt")) {
-    user = JSON.parse(Cookies.get("user"));
-    jwtToken = Cookies.get("jwt");
-  }
-
   // graphql
   const GETTODO = gql`
     {
@@ -102,7 +53,10 @@
   `;
 
   onMount(() => {
-    const URL = `${config.apiUrl}/graphql`;
+    // Prevent a visual bug with WOW
+    document.querySelector('.wow').style.visibility = 'visible';
+
+    const URL = `${context.apiUrl}/graphql`;
 
     const client = new ApolloClient({
       uri: URL,
@@ -130,15 +84,6 @@
         orders = response.data.orders;
       });
   }
-
-  /**
-   * Logout the user
-   */
-  function logout() {
-    user = jwtToken = null;
-    Cookies.set("user", null);
-    Cookies.set("jwt", null);
-  }
 </script>
 
 <svelte:head>
@@ -146,10 +91,10 @@
 </svelte:head>
 
 <!--Grid row-->
-<div class="row wow fadeIn">
+<div class="row wow fadeIn" style="visibility:hidden">
 
   <!--Grid column-->
-  <div class="col-md-6 mb-4">
+  <div class="col-md-6">
 
     <!--Card-->
     <div class="card">
@@ -157,13 +102,10 @@
       <!-- Card header -->
       <div class="card-header" />
 
-      <h1>{$_('messages.success', { default: 'Great success!' })}</h1>
-
       <!--Card content-->
       <div class="card-body">
-        Welcome stranger!
         {#if user}
-          I am in... {user.email}
+          Welcome "{user.email}" with role "{user.role.name}"
           <div>
             <button on:click={fetchGraphqlOrders}>
               Fetch order via GraphQL
@@ -178,79 +120,13 @@
               <li>{order.firstName}</li>
             {/each}
           </ul>
+        {:else if $page.query.action === 'register'}
+          <RegisterForm />
         {:else}
-          <form on:submit|preventDefault={handleAuthenticate}>
-
-            <div class="row text-left">
-
-              <!--Grid column-->
-              <div class="col-md-6 mb-4">
-
-                <!--Email validation-->
-                <div class="md-form">
-                  <i class="fas fa-envelope prefix" />
-                  <input
-                    type="text"
-                    bind:value={username}
-                    id="username"
-                    class="form-control validate" />
-                  <label
-                    for="username"
-                    data-error="wrong"
-                    data-success="right"
-                    class="">
-                    Type your username
-                  </label>
-                </div>
-
-              </div>
-              <!--Grid column-->
-
-              <!--Grid column-->
-              <div class="col-md-6 mb-4">
-
-                <!--Password validation-->
-                <div class="md-form">
-                  <i class="fas fa-lock prefix" />
-                  <input
-                    type="password"
-                    id="password"
-                    bind:value={password}
-                    class="form-control validate" />
-                  <label
-                    for="password"
-                    data-error="wrong"
-                    data-success="right"
-                    class="">
-                    Type your password
-                  </label>
-                </div>
-
-              </div>
-              <!--Grid column-->
-
-            </div>
-
-            <button type="submit" class="btn btn-primary">
-              {$_('actions.login')}
-            </button>
-
-          </form>
+          <LoginForm />
         {/if}
 
-        {#if loginError === 400}
-          <div class="alert alert-danger" role="alert">
-            Wrong password or username!
-          </div>
-        {/if}
-
-        {#if user}
-          <div>
-            <button type="button" class="btn btn-light" on:click={logout}>
-              Logout
-            </button>
-          </div>
-        {/if}
+        <LogoutForm />
       </div>
 
     </div>

@@ -16,6 +16,28 @@
     "de": "Deutsch"
   },
   "actions": {
-    "login": "Devenir quelqu'un"
+    "login": ""
+  },
+  "login": {
+    "messages": {
+      "errors": {
+        "badCredentials": "Mauvais mot de passer ou nom d'utilisateur!"
+      }
+    },
+    "actions": {
+      "typeUsername": "Saisir nom d'utilisateur",
+      "typePassword": "Saisir mot de passe",
+      "authenticate": "Ouvrir une session",
+      "logout": "Fermer la session",
+      "showRegisterForm": "C'est rapide! Ouvrir un nouveau compte.",
+      "showLoginForm": "Afficher le formulaire de login",
+      "createAccount": "Créer un nouveau compte"
+    },
+    "labels": {
+      "welcomeStranger": "Bienvenue étranger!",
+      "loginHeader": "Identification",
+      "newAccountHeader": "Nouveau compte"
+    }
   }
+
 }

@@ -19,9 +19,7 @@
     "graphql": "^14.5.8",
     "js-cookie": "^2.2.1",
     "polka": "next",
-    "sirv": "^0.4.0",
-    "svelte-apollo": "^0.3.0",
-    "svelte-i18n": "^2.1.1"
+    "sirv": "^0.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
@@ -44,6 +42,8 @@
     "rollup-plugin-svelte": "^5.0.1",
     "rollup-plugin-terser": "^4.0.4",
     "sapper": "^0.27.0",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "svelte-apollo": "^0.3.0",
+    "svelte-i18n": "^2.1.1"
   }
 }

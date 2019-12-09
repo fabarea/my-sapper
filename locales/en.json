@@ -17,7 +17,25 @@
     "fr": "Français",
     "de": "Deutsch"
   },
-  "actions": {
-    "login": "Log me in"
+  "login": {
+    "messages": {
+      "errors": {
+        "badCredentials": "Wrong password or username!"
+      }
+    },
+    "actions": {
+      "typeUsername": "Type username",
+      "typePassword": "Type password",
+      "authenticate": "Log me in",
+      "logout": "Logout",
+      "showRegisterForm": "It is quick! Open a new account",
+      "showLoginForm": "Show login form",
+      "createAccount": "Create a new account"
+    },
+    "labels": {
+      "welcomeStranger": "Welcome stranger!",
+      "loginHeader": "Authentication",
+      "newAccountHeader": "New account"
+    }
   }
 }

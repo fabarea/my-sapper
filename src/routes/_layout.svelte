@@ -6,6 +6,10 @@
   import Breadcrumb from "../components/Breadcrumb.svelte";
   import Footer from "../components/Footer.svelte";
 
+  // Initialize the context
+  import { initializedContext } from "../context";
+  initializedContext();
+
   export let segment;
 </script>
 
@@ -69,13 +73,12 @@
     <div class="container-fluid mt-5">
 
       <!-- Heading -->
-      <div class="card mb-4 wow fadeIn">
+      <div class="card mb-4">
 
         <!--Card content-->
         <div class="card-body d-sm-flex justify-content-between">
-          <Breadcrumb />
+          <Breadcrumb {segment}/>
         </div>
-
         <slot />
       </div>
       <!-- Heading -->
