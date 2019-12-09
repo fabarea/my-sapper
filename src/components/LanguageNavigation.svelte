@@ -1,5 +1,7 @@
 <script>
   import { _, locale, locales } from "svelte-i18n";
+  import Cookies from "js-cookie";
+
   export let segment;
 </script>
 
@@ -11,8 +13,11 @@
       <a
         class="nav-link waves-effect"
         class:selected={$locale.includes(item)}
-        href={`${segment}#!${item}`}
-        on:click={() => ($locale = item)}>
+        href={`${segment}#language=${item}`}
+        on:click={() => {
+          $locale = item;
+          Cookies.set('language', item);
+        }}>
         {$_(`languages.${item}`)}
       </a>
     </li>
