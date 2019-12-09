@@ -1,8 +1,8 @@
 <script>
-    import {getClient, query, mutate} from "svelte-apollo";
-    import {gql} from "apollo-boost";
+  import { getClient, query, mutate } from "svelte-apollo";
+  import { gql } from "apollo-boost";
 
-    const GETTODO = gql`
+  const GETTODO = gql`
     {
       allTodos {
         data {
@@ -13,7 +13,7 @@
       }
     }
   `;
-    const ADDTODO = gql`
+  const ADDTODO = gql`
     mutation($todoEdit: String!) {
       createTodo(input: { todo: { title: $todoEdit, done: false } }) {
         todo {
@@ -24,50 +24,50 @@
       }
     }
   `;
-    let todoEdit = "";
-    const client = getClient();
-    const todoOp = query(client, {query: GETTODO});
+  let todoEdit = "";
+  const client = getClient();
+  const todoOp = query(client, { query: GETTODO });
 
-    function addTodo() {
-        const todoAdd = mutate(client, {
-            mutation: ADDTODO,
-            variables: {
-                todoEdit
-            }
-        })
-                .then(data => {
-                    todoEdit = "";
-                    todoOp.refetch();
-                })
-                .catch(e => {
-                    console.error("error: ", e);
-                });
-    }
+  function addTodo() {
+    const todoAdd = mutate(client, {
+      mutation: ADDTODO,
+      variables: {
+        todoEdit
+      }
+    })
+      .then(data => {
+        todoEdit = "";
+        todoOp.refetch();
+      })
+      .catch(e => {
+        console.error("error: ", e);
+      });
+  }
 </script>
 
 <style>
-    .done {
-        text-decoration: line-through;
-    }
+  .done {
+    text-decoration: line-through;
+  }
 </style>
 
 <div style="text-align:center">
 
-<!--    <form on:submit|preventDefault={addTodo}>-->
-<!--        <input placeholder="new todo" bind:value={todoEdit}/>-->
-<!--        <button method="submit">Submit</button>-->
-<!--    </form>-->
+  <!--    <form on:submit|preventDefault={addTodo}>-->
+  <!--        <input placeholder="new todo" bind:value={todoEdit}/>-->
+  <!--        <button method="submit">Submit</button>-->
+  <!--    </form>-->
 
-    {#await $todoOp}
-        <p>.. loading</p>
-    {:then data}
+  {#await $todoOp}
+    <p>.. loading</p>
+  {:then data}
 
-        {#each data.data['allTodos']['data'] as todo, i}
-            <p class:done={todo.completed}>{todo.title}</p>
-        {/each}
+    {#each data.data['allTodos']['data'] as todo, i}
+      <p class:done={todo.completed}>{todo.title}</p>
+    {/each}
 
-    {:catch e}
-        {e}
-    {/await}
+  {:catch e}
+    {e}
+  {/await}
 
 </div>

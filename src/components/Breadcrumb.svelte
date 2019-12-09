@@ -1,8 +1,7 @@
-
 <h4 class="mb-2 mb-sm-0 pt-1">
-    <a href="https://mdbootstrap.com/docs/jquery/">Home</a>
-    <span>/</span>
-    <span>Dashboard</span>
+  <a href="https://mdbootstrap.com/docs/jquery/">Home</a>
+  <span>/</span>
+  <span>Dashboard</span>
 </h4>
 
 <!--<form class="d-flex justify-content-center">-->

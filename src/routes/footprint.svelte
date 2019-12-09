@@ -1,30 +1,27 @@
 <svelte:head>
-    <title>Footprint</title>
+  <title>Footprint</title>
 </svelte:head>
-
 
 <!--Grid row-->
 <div class="row wow fadeIn">
 
-    <!--Grid column-->
-    <div class="col-md-6 mb-4">
+  <!--Grid column-->
+  <div class="col-md-6 mb-4">
 
-        <!--Card-->
-        <div class="card">
+    <!--Card-->
+    <div class="card">
 
-            <!-- Card header -->
-            <div class="card-header"></div>
+      <!-- Card header -->
+      <div class="card-header" />
 
-            <!--Card content-->
-            <div class="card-body">
-                Work in progress...
-            </div>
-
-        </div>
-        <!--/.Card-->
+      <!--Card content-->
+      <div class="card-body">Work in progress...</div>
 
     </div>
-    <!--Grid column-->
+    <!--/.Card-->
+
+  </div>
+  <!--Grid column-->
 
 </div>
 <!--Grid row-->

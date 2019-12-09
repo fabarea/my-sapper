@@ -1,3 +1,3 @@
 export default {
-	apiUrl: 'https://api.plateformeco2.ch' // http://localhost:1337
-}
+  apiUrl: "https://api.plateformeco2.ch" // http://localhost:1337
+};
