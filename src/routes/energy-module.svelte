@@ -5,8 +5,7 @@
     import ApolloClient from 'apollo-boost';
     import gql from 'graphql-tag';
     import config from '../config';
-    import { _ } from 'svelte-i18n'
-
+    import {_} from 'svelte-i18n'
 
     // Request API.
     // Add your own code here to customize or restrict how the public can register new users.
@@ -33,14 +32,29 @@
     export let user = null;
     export let jwtToken = '';
     export let loginError = 0;
-    export let username = ''
+    export let username = '';
+    export let password = '';
 
+    /**
+     * Authenticate a user against Strapi API.
+     */
     function handleAuthenticate() {
+
+        console.log(username)
+        // temporary
+        const _username = username
+                ? username
+                : 'user@strapi.io';
+
+        const _password = password
+                ? password
+                : 'strapiPassword';
+
         loginError = 0
         axios
                 .post(`${config.apiUrl}/auth/local`, {
-                    identifier: 'user@strapi.io',
-                    password: 'strapiPassword1',
+                    identifier: _username,
+                    password: _password,
                 })
                 .then(response => {
 
@@ -55,7 +69,11 @@
                 .catch(error => {
                     // Handle error.
                     loginError = error.response.status
-                    console.log('An error occurred:', error);
+                    if (loginError === 400) {
+                        console.log('An error occurred: wrong credentials')
+                    } else {
+                        console.log('An error occurred:', error);
+                    }
                 });
     }
 
@@ -180,7 +198,8 @@
                                 <!--Email validation-->
                                 <div class="md-form">
                                     <i class="fas fa-envelope prefix"></i>
-                                    <input type="text" bind:value="{username}" id="username" class="form-control validate">
+                                    <input type="text" bind:value="{username}" id="username"
+                                           class="form-control validate">
                                     <label for="username" data-error="wrong" data-success="right" class="">Type your
                                         username</label>
                                 </div>
@@ -194,8 +213,8 @@
                                 <!--Password validation-->
                                 <div class="md-form">
                                     <i class="fas fa-lock prefix"></i>
-                                    <input type="password" id="form10" class="form-control validate">
-                                    <label for="form10" data-error="wrong" data-success="right" class="">Type your
+                                    <input type="password" id="password" bind:value="{password}" class="form-control validate">
+                                    <label for="password" data-error="wrong" data-success="right" class="">Type your
                                         password</label>
                                 </div>
 
@@ -204,7 +223,7 @@
 
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Log me in</button>
+                        <button type="submit" class="btn btn-primary">{$_('actions.login')}</button>
 
                     </form>
                 {/if}

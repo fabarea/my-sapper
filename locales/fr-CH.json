@@ -14,5 +14,8 @@
     "en": "English",
     "fr": "Français",
     "de": "Deutsch"
+  },
+  "actions": {
+    "login": "Devenir quelqu'un"
   }
 }
