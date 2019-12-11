@@ -1,89 +1,44 @@
 <script>
-  import axios from "axios";
-  import Cookies from "js-cookie";
   import { onMount } from "svelte";
-  import ApolloClient from "apollo-boost";
-  import gql from "graphql-tag";
+  import { getClient} from 'svelte-apollo';
   import { _ } from "svelte-i18n";
   import { stores } from "@sapper/app";
-  import { getContext } from "svelte";
   import { userStore } from "../stores";
   import LoginForm from "../components/Login/LoginForm.svelte";
   import RegisterForm from "../components/Login/RegisterForm.svelte";
   import LogoutForm from "../components/Login/LogoutForm.svelte";
+  import {GET_ORGANIZATIONS} from "../queries/organization";
 
   // Get page from the store. It should be called with $page
   const { page } = stores();
+
+  // Define a reactive "user"
   $: user = $userStore;
 
-  // Retrieve the context
-  const context = getContext("context");
-  let { jwtToken } = context;
+  // 2. Get the Apollo client from context
+  const client = getClient();
 
   // Local reactive props
-  export let orders = [];
+  let organizations = [];
 
   /**
    *
    */
-  function fetchOrders() {
-    axios
-      .get(`${context.apiUrl}/orders`, {
-        headers: {
-          Authorization: "Bearer " + jwtToken
-        }
-      })
-      .then(response => {
-        orders = response.data;
-      })
-      .catch(error => {
-        // Handle error.
-        console.log("An error occurred:", error);
-      });
-  }
-
-  // graphql
-  const GETTODO = gql`
-    {
-      orders {
-        id
-        firstName
-      }
-    }
-  `;
-
-  onMount(() => {
-    // Prevent a visual bug with WOW
-    document.querySelector('.wow').style.visibility = 'visible';
-
-    const URL = `${context.apiUrl}/graphql`;
-
-    const client = new ApolloClient({
-      uri: URL,
-
-      request: operation => {
-        operation.setContext({
-          headers: {
-            Authorization: "Bearer " + Cookies.get("jwt")
-          }
-        });
-      },
-      onError: ({ networkError, graphQLErrors }) => {
-        console.log("graphQLErrors", graphQLErrors);
-        console.log("networkError", networkError);
-      }
-    });
-  });
-
   function fetchGraphqlOrders() {
     client
       .query({
-        query: GETTODO
+        query: GET_ORGANIZATIONS
       })
       .then(response => {
-        orders = response.data.orders;
+        organizations = response.data.organizations;
       });
   }
+
+  // lifecycle: onMount
+  onMount(() => {
+    // Prevent a visual bug with WOW
+    document.querySelector('.wow').style.visibility = 'visible';
+  });
 </script>
 
 <svelte:head>
@@ -108,16 +63,13 @@
           Welcome "{user.email}" with role "{user.role.name}"
           <div>
             <button on:click={fetchGraphqlOrders}>
-              Fetch order via GraphQL
+              Fetch organization via GraphQL
             </button>
-          </div>
-          <div>
-            <button on:click={fetchOrders}>Fetch order via REST</button>
           </div>
 
           <ul>
-            {#each orders as order}
-              <li>{order.firstName}</li>
+            {#each organizations as organization}
+              <li>{organization.name}</li>
             {/each}
           </ul>
         {:else if $page.query.action === 'register'}

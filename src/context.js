@@ -4,7 +4,7 @@ import { setContext } from "svelte";
 export const initializedContext = function() {
   const context = {
     apiUrl: "https://api.plateformeco2.ch", // http://localhost:1337
-    jwtToken: "",
+    jwtToken: ""
   };
 
   if (Cookies.get("user") && Cookies.get("jwt")) {
@@ -12,4 +12,7 @@ export const initializedContext = function() {
   }
 
   setContext("context", context);
+
+  return context
+
 };

@@ -1,32 +1,10 @@
 <script>
   import { getClient, query, mutate } from "svelte-apollo";
-  import { gql } from "apollo-boost";
+  import {GETTODO, ADDTODO} from "../queries/todo";
 
-  const GETTODO = gql`
-    {
-      allTodos {
-        data {
-          _id
-          title
-          completed
-        }
-      }
-    }
-  `;
-  const ADDTODO = gql`
-    mutation($todoEdit: String!) {
-      createTodo(input: { todo: { title: $todoEdit, done: false } }) {
-        todo {
-          id
-          title
-          done
-        }
-      }
-    }
-  `;
   let todoEdit = "";
   const client = getClient();
-  const todoOp = query(client, { query: GETTODO });
+  const todos = query(client, { query: GETTODO });
 
   function addTodo() {
     const todoAdd = mutate(client, {
@@ -37,7 +15,7 @@
     })
       .then(data => {
         todoEdit = "";
-        todoOp.refetch();
+        todos.refetch();
       })
       .catch(e => {
         console.error("error: ", e);
@@ -58,7 +36,7 @@
   <!--        <button method="submit">Submit</button>-->
   <!--    </form>-->
 
-  {#await $todoOp}
+  {#await $todos}
     <p>.. loading</p>
   {:then data}
 

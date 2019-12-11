@@ -8,7 +8,11 @@
 
   // Initialize the context
   import { initializedContext } from "../context";
-  initializedContext();
+  const context = initializedContext();
+
+  // Initialize the GraphQL client
+  import { initializedClient } from "../graphql";
+  initializedClient(context);
 
   export let segment;
 </script>
@@ -77,9 +81,9 @@
 
         <!--Card content-->
         <div class="card-body d-sm-flex justify-content-between">
-          <Breadcrumb {segment}/>
+          <Breadcrumb {segment} />
         </div>
-        <slot />
+          <slot />
       </div>
       <!-- Heading -->
 
