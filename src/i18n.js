@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 register("en", () => import("../locales/en.json"));
 register("fr", () => import("../locales/fr-CH.json"));
-register("de", () => import("../locales/de-CH.json"));
+// register("de", () => import("../locales/de-CH.json"));
 
 // English is always the fallback in this application
 let defaultLocale = "en";
@@ -11,7 +11,7 @@ let defaultLocale = "en";
 // business logic to retrieve the default language
 if (typeof window !== "undefined") {
   // Define possible languages
-  const possibleLanguages = ["en", "fr", "de"];
+  const possibleLanguages = ["en", "fr"];
 
   // Quickly compute the parameters in the hash tag
   const parameters = location.hash

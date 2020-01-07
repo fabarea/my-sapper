@@ -105,6 +105,7 @@
 
     // could be written like this
     // organizations.result().then(v => console.log(v.data.organizations))
+    // try as well this get(organizations)
     for (let organization of myOrganizations) {
       mutate(
               client, {
@@ -160,7 +161,7 @@
     <!--    todo import https://mdbootstrap.com/docs/jquery/tables/datatables/-->
 
     <!--/.Card-->
-    <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
+    <table class="table table-striped" cellspacing="0" width="100%">
       <thead>
       <tr>
         <th class="th-sm">Name

@@ -7,11 +7,13 @@
   import Footer from "../components/Footer.svelte";
 
   // Initialize the context
-  import { initializedContext } from "../context";
+  import {initializedContext} from "../context";
+
   const context = initializedContext();
 
   // Initialize the GraphQL client
-  import { initializedClient } from "../graphql";
+  import {initializedClient} from "../graphql";
+
   initializedClient(context);
 
   export let segment;
@@ -22,8 +24,7 @@
   <header>
 
     <!-- Navbar -->
-    <nav
-      class="navbar fixed-top navbar-expand-lg navbar-light white
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white
       scrolling-navbar">
       <div class="container-fluid">
 
@@ -34,13 +35,13 @@
 
         <!-- Collapse -->
         <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
           <span class="navbar-toggler-icon" />
         </button>
 
@@ -83,7 +84,7 @@
         <div class="card-body d-sm-flex justify-content-between">
           <Breadcrumb {segment} />
         </div>
-          <slot />
+        <slot />
       </div>
       <!-- Heading -->
 
@@ -92,8 +93,7 @@
   <!--Main layout-->
 
   <!--Footer-->
-  <footer
-    class="page-footer text-center font-small primary-color-dark darken-2 mt-4
+  <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4
     wow fadeIn">
     <!-- <SocialMediaCard/>-->
     <Footer />
