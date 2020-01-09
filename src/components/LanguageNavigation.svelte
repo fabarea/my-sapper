@@ -16,7 +16,7 @@
         href={`${segment}#language=${item}`}
         on:click={() => {
           $locale = item;
-          Cookies.set('language', item);
+          Cookies.set('language', item, { expires: 1, sameSite: true});
         }}>
         {$_(`languages.${item}`)}
       </a>

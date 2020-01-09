@@ -5,21 +5,16 @@
   import LanguageNavigation from "../components/LanguageNavigation.svelte";
   import Breadcrumb from "../components/Breadcrumb.svelte";
   import Footer from "../components/Footer.svelte";
+  import { setContext } from "svelte";
 
-  // Initialize the context
-  import {initializedContext} from "../context";
-
-  const context = initializedContext();
-
-  // Initialize the GraphQL client
-  import {initializedClient} from "../graphql";
-
-  initializedClient(context);
+  setContext("context", {
+    apiUrl: "https://api.plateformeco2.ch", // http://localhost:1337
+  });
 
   export let segment;
 </script>
 
-<div class="container-for-admin">
+<div>
   <!--Main Navigation-->
   <header>
 

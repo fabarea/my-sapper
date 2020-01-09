@@ -4,6 +4,7 @@
   import { stores } from "@sapper/app";
   import { _ } from "svelte-i18n";
   import Cookies from "js-cookie";
+  import { userStore } from "../../stores";
 
   // Get page from the store. It should be called with $page
   const { page } = stores();
@@ -15,9 +16,6 @@
   export let username = "";
   export let password = "";
 
-  import { userStore } from "../../stores";
-  $: user = $userStore;
-
   /**
    * Authenticate a user against Strapi API.
    */
@@ -25,7 +23,6 @@
     // temporary
     const _username = username ? username : "user@strapi.io";
     const _password = password ? password : "strapiPassword";
-
     axios
       .post(`${context.apiUrl}/auth/local`, {
         identifier: _username,
@@ -40,14 +37,13 @@
           userStore.set(response.data.user);
 
           // Persist data in a cookie which is more secure than the localStorage
-          Cookies.set("user", user);
-          Cookies.set("jwt", jwtToken);
+          Cookies.set("user", user, { expires: 1, sameSite: true});
+          Cookies.set("jwt", jwtToken, { expires: 1, sameSite: true}); // secure: true
         }
       })
       .catch(error => {
         // Handle error.
-        loginError = error.response.status;
-        if (loginError === 400) {
+        if (error && error.response && error.response.status === 400) {
           console.log("An error occurred: wrong credentials");
         } else {
           console.log("An error occurred:", error);

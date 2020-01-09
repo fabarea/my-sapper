@@ -1,8 +1,13 @@
 import ApolloClient from "apollo-boost";
 import { setClient } from 'svelte-apollo';
+import { getContext } from "svelte";
+import Cookies from "js-cookie";
 
-export const initializedClient = function(context) {
-  if (context.jwtToken) {
+export const initializedClient = function() {
+  if (typeof window !== "undefined" &&  Cookies.get("jwt")) {
+
+    // Fetch the context
+    const context = getContext('context');
 
     // Initialize the client
     const client = new ApolloClient({
@@ -11,7 +16,7 @@ export const initializedClient = function(context) {
       request: operation => {
         operation.setContext({
           headers: {
-            Authorization: "Bearer " + context.jwtToken
+            Authorization: "Bearer " + Cookies.get("jwt")
           }
         });
       },
@@ -23,5 +28,4 @@ export const initializedClient = function(context) {
 
     setClient(client)
   }
-
 };

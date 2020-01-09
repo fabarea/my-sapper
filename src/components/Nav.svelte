@@ -18,31 +18,32 @@
 
 <div class="list-group-item active">Data entry</div>
 
-<a href="/footprint"
+<a href="/footprint/"
    class="list-group-item list-group-item-action waves-effect">
   <i class="far fa-list-alt mr-3" />
   <strong>Footprint form</strong>
 </a>
 
-<a href="/energy-module"
+<a href="/energy-module/"
    class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-recycle mr-3" />
   <strong>Energy module</strong>
 </a>
 
-<a href="/access-rights"
+<a href="/access-rights/"
    class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-walking mr-3" />
   Manage access rights
 </a>
 
-<a href="/data-collection-tools"
+<a href="/data-collection-tools/"
    class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-tools mr-3" />
   Data collection tools
 </a>
 
-<a href="/demo-api" class="list-group-item list-group-item-action waves-effect">
+<a href="/demo-api/"
+   class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-tools mr-3" />
   <strong>API demo</strong>
 </a>
@@ -50,12 +51,12 @@
 <!-- Footprint Interpretation -->
 <div class="list-group-item active mt-4">Footprint Interpretation</div>
 
-<a href="/graphs-and-tables"
+<a href="/graphs-and-tables/"
    class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-chart-bar mr-3" />
   Graphs and tables
 </a>
-<a href="/simulations"
+<a href="/simulations/"
    class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-project-diagram mr-3" />
   Simulations
@@ -65,43 +66,42 @@
 <!-- Admin -->
 <div class:hidden class="list-group-item active mt-4">Admin</div>
 
-<a href="/indicator"
+<a href="/indicator/"
    class:hidden
    class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-user-cog mr-3" />
   Indicator
 </a>
 
-<a href="/model"
+<a href="/model/"
    class:hidden
    class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-user-cog mr-3" />
   Model
 </a>
-<a href="/user-administration"
+<a href="/user-administration/"
    class:hidden
    class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-user-cog mr-3" />
   <strong>User administration</strong>
 </a>
 
-<a href="/entreprises"
+<a href="/entreprises/"
    class:hidden
    class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-user-cog mr-3" />
   Entreprises
 </a>
 
-<a href="/scope"
+<a href="/scope/"
    class:hidden
    class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-user-cog mr-3" />
   Scope
 </a>
-<a
-        href="/partners"
-        class:hidden
-        class="list-group-item list-group-item-action waves-effect">
+<a href="/partners/"
+   class:hidden
+   class="list-group-item list-group-item-action waves-effect">
   <i class="fas fa-user-cog mr-3" />
   Partners
 </a>

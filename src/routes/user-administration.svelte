@@ -5,42 +5,29 @@
   import {stores} from "@sapper/app";
   import {GET_ORGANIZATIONS, CREATE_ORGANIZATION, DELETE_ORGANIZATION} from "../queries/organization";
   import {get} from "svelte/store";
+  import {readable} from "svelte/store";
+  import {userStore} from "../stores";
+  import {initializedClient} from "../graphql";
 
+  const user = get(userStore);
 
-  // lifecycle: onMount
-  onMount(() => {
-    // Prevent a visual bug with WOW
-    document.querySelector('.wow').style.visibility = 'visible';
-    fetchOrganizations()
-  });
+  // Initialize the GraphQL client
+  initializedClient();
+  const client = getClient();
 
   // Get page from the store. It should be called with $page
   const {page} = stores();
 
-  // 2. Get the Apollo client from context
-  const client = getClient();
-
-  // Local reactive props
-  import {readable} from "svelte/store";
-
-  // We have to handle two cases, one for the client, the other for the server
-  const organizations = typeof (window) !== 'undefined'
-          ? query(
-                  client,
-                  {
-                    query: GET_ORGANIZATIONS
-                    // variables, fetchPolicy, errorPolicy, and others
-                  }
-          )
-          : readable(
-                  {
-                    data: {
-                      organizations: []
-                    }
-                  },
-                  () => {}
-          );
-
+  let isMounted = false;
+  let organizations = readable(
+          {
+            data: {
+              organizations: []
+            }
+          },
+          () => {
+          }
+  );
 
   let myOrganizations;
 
@@ -56,6 +43,27 @@
       });
     }
   });
+
+
+  // lifecycle: onMount
+  onMount(() => {
+    // Prevent a visual bug with WOW
+    document.querySelector('.wow').style.visibility = 'visible';
+    fetchOrganizations()
+    isMounted = true;
+
+    // We have to handle two cases, one for the client, the other for the server
+    organizations = query(
+            client,
+            {
+              query: GET_ORGANIZATIONS
+              // variables, fetchPolicy, errorPolicy, and others
+            }
+    );
+
+    refreshOrganizations();
+  });
+
 
   function refreshOrganizations() {
     organizations.refetch()
@@ -148,8 +156,10 @@
 <!--Grid row-->
 <div class="row wow fadeIn" style="visibility: hidden">
 
+  {#if isMounted && user && user.role.name === 'Admin'}
+
   <!--Grid column-->
-  <div class="col-md">
+    <div class="col-md">
 
     <!--Card content-->
     <div class="card-body">
@@ -158,9 +168,9 @@
       <button class="btn btn-default" on:click={deleteOrganizations}>Delete all Organizations</button>
     </div>
 
-    <!--    todo import https://mdbootstrap.com/docs/jquery/tables/datatables/-->
+      <!--    todo import https://mdbootstrap.com/docs/jquery/tables/datatables/-->
 
-    <!--/.Card-->
+      <!--/.Card-->
     <table class="table table-striped" cellspacing="0" width="100%">
       <thead>
       <tr>
@@ -194,7 +204,7 @@
       </tbody>
     </table>
   </div>
-  <!--Grid column-->
-
+    <!--Grid column-->
+  {/if}
 </div>
 <!--Grid row-->
