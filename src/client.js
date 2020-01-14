@@ -7,5 +7,9 @@ sapper
     target: document.querySelector("#sapper")
   })
   .then(() => {
+
+    // SideNav Initialization
+    $(".button-collapse").sideNav();
+
     new WOW().init();
   });

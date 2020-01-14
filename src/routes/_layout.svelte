@@ -1,7 +1,6 @@
 <script>
   import Nav from "../components/Nav.svelte";
   import Logo from "../components/Logo.svelte";
-  import SubNavigation from "../components/SubNavigation.svelte";
   import LanguageNavigation from "../components/LanguageNavigation.svelte";
   import Breadcrumb from "../components/Breadcrumb.svelte";
   import Footer from "../components/Footer.svelte";
@@ -14,84 +13,67 @@
   export let segment;
 </script>
 
-<div>
-  <!--Main Navigation-->
-  <header>
+<!--Double navigation-->
+<header>
+  <!-- Sidebar navigation -->
+  <div id="slide-out" class="side-nav fixed white overflow-auto">
 
-    <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light white
-      scrolling-navbar">
-      <div class="container-fluid">
+    <Logo />
 
-        <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="/">
-          <strong class="blue-text">Climate Services</strong>
-        </a>
-
-        <!-- Collapse -->
-        <button
-                class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon" />
-        </button>
-
-        <!-- Links -->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-          <SubNavigation {segment} />
-
-          <LanguageNavigation {segment} />
-
-        </div>
-
-      </div>
-    </nav>
-    <!-- Navbar -->
-
-    <!-- Sidebar -->
-    <div class="sidebar-fixed position-fixed">
-
-      <Logo />
-
-      <div class="list-group list-group-flush">
-        <Nav {segment} />
-      </div>
-
+    <div class="list-group list-group-flush">
+      <Nav {segment} />
     </div>
-    <!-- Sidebar -->
 
-  </header>
-  <!--Main Navigation-->
+  </div>
+  <!--/. Sidebar navigation -->
 
-  <!--Main layout-->
-  <main class="pt-5 mx-lg-5">
-    <div class="container-fluid mt-5">
-
-      <!-- Heading -->
-      <div class="card mb-4">
-
-        <!--Card content-->
-        <div class="card-body d-sm-flex justify-content-between">
-          <Breadcrumb {segment} />
-        </div>
-        <slot />
-      </div>
-      <!-- Heading -->
-
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav white">
+    <!-- SideNav slide-out button -->
+    <div class="float-left">
+      <a href="/" data-activates="slide-out" class="button-collapse black-text">
+        <i class="fas fa-bars"></i>
+      </a>
     </div>
-  </main>
-  <!--Main layout-->
 
-  <!--Footer-->
-  <footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4
-    wow fadeIn">
-    <!-- <SocialMediaCard/>-->
-    <Footer />
-  </footer>
-  <!--/.Footer-->
-</div>
+    <!-- Brand -->
+    <a class="navbar-brand waves-effect pl-2" href="/" style="font-size: 1.25rem;">
+      <strong class="blue-text">Climate Services</strong>
+    </a>
+
+    <!-- Links -->
+    <div class="ml-auto">
+      <LanguageNavigation {segment} />
+    </div>
+
+  </nav>
+  <!-- /.Navbar -->
+</header>
+
+<!--Main layout-->
+<main class="pt-5 mx-lg-5">
+  <div class="container-fluid mt-5">
+
+    <!-- Heading -->
+    <div class="card mb-4">
+
+      <!--Card content-->
+      <div class="card-body d-sm-flex justify-content-between">
+        <Breadcrumb {segment} />
+      </div>
+      <!-- Material unchecked -->
+      <slot />
+    </div>
+    <!-- Heading -->
+
+  </div>
+</main>
+<!--Main layout-->
+
+<!--Footer-->
+<footer class="page-footer text-center font-small primary-color-dark darken-2 mt-4
+  wow fadeIn">
+  <!-- <SocialMediaCard/>-->
+  <Footer />
+</footer>
+<!--/.Footer-->
